@@ -8,6 +8,11 @@ const alertVariants = cva(
   "relative w-full rounded-lg border px-4 py-3 text-sm grid has-[>svg]:grid-cols-[calc(var(--spacing)*4)_1fr] grid-cols-[0_1fr] has-[>svg]:gap-x-3 gap-y-0.5 items-start [&>svg]:size-4 [&>svg]:translate-y-0.5 [&>svg]:text-current",
   {
     variants: {
+      type: {
+        solid: "bg-opacity-100",
+        outline: "bg-transparent!",
+        tonal: "bg-opacity-100",
+      },
       variant: {
         default:
           "bg-card text-card-foreground *:data-[slot=alert-description]:text-card-foreground/90",
@@ -25,64 +30,113 @@ const alertVariants = cva(
         destructive:
           "bg-destructive text-destructive-foreground *:data-[slot=alert-description]:text-destructive-foreground/90",
       },
-      inline: {
+      outline: {
         true: "bg-transparent",
         false: "",
       },
     },
     compoundVariants: [
       {
+        type: "outline",
         variant: "default",
-        inline: true,
         class:
           "border-card-foreground text-card-foreground *:data-[slot=alert-description]:text-card-foreground/90",
       },
       {
         variant: "primary",
-        inline: true,
+        type: "outline",
         class:
           "border-primary text-primary *:data-[slot=alert-description]:text-primary/90",
       },
       {
         variant: "secondary",
-        inline: true,
+        type: "outline",
         class:
           "border-secondary text-secondary *:data-[slot=alert-description]:text-secondary/90",
       },
       {
         variant: "muted",
-        inline: true,
+        type: "outline",
         class:
           "border-muted-foreground text-muted-foreground *:data-[slot=alert-description]:text-muted-foreground/90",
       },
       {
         variant: "info",
-        inline: true,
+        type: "outline",
         class:
           "border-info text-info *:data-[slot=alert-description]:text-info/90",
       },
       {
         variant: "success",
-        inline: true,
+        type: "outline",
         class:
           "border-success text-success *:data-[slot=alert-description]:text-success/90",
       },
       {
         variant: "warning",
-        inline: true,
+        type: "outline",
         class:
           "border-warning text-warning *:data-[slot=alert-description]:text-warning/90",
       },
       {
         variant: "destructive",
-        inline: true,
+        type: "outline",
         class:
           "border-destructive text-destructive *:data-[slot=alert-description]:text-destructive/90",
+      },
+      {
+        type: "tonal",
+        variant: "default",
+        class:
+          "bg-card/20 text-card-foreground *:data-[slot=alert-description]:text-card-foreground/90",
+      },
+      {
+        variant: "primary",
+        type: "tonal",
+        class:
+          "bg-primary/20 text-primary *:data-[slot=alert-description]:text-primary/90",
+      },
+      {
+        variant: "secondary",
+        type: "tonal",
+        class:
+          "bg-secondary/20 text-secondary/90 *:data-[slot=alert-description]:text-secondary/90",
+      },
+      {
+        variant: "muted",
+        type: "tonal",
+        class:
+          "bg-muted/20 text-muted-foreground *:data-[slot=alert-description]:text-muted-foreground/90",
+      },
+      {
+        variant: "info",
+        type: "tonal",
+        class:
+          "bg-info/20 text-info *:data-[slot=alert-description]:text-info/90",
+      },
+      {
+        variant: "success",
+        type: "tonal",
+        class:
+          "bg-success/20 text-success *:data-[slot=alert-description]:text-success/90",
+      },
+      {
+        variant: "warning",
+        type: "tonal",
+        class:
+          "bg-warning/20 text-warning *:data-[slot=alert-description]:text-warning/90",
+      },
+      {
+        variant: "destructive",
+        type: "tonal",
+        class:
+          "bg-destructive/20 text-destructive *:data-[slot=alert-description]:text-destructive/90",
       },
     ],
     defaultVariants: {
       variant: "default",
-      inline: false,
+      type: "solid",
+      outline: false,
     },
   }
 );
@@ -90,14 +144,14 @@ const alertVariants = cva(
 function Alert({
   className,
   variant,
-  inline,
+  type,
   ...props
 }: React.ComponentProps<"div"> & VariantProps<typeof alertVariants>) {
   return (
     <div
       data-slot="alert"
       role="alert"
-      className={cn(alertVariants({ variant, inline }), className)}
+      className={cn(alertVariants({ variant, type }), className)}
       {...props}
     />
   );
@@ -137,16 +191,16 @@ function KAlert({
   title,
   description,
   variant,
-  inline,
+  outline,
   ...props
 }: React.ComponentProps<"div"> &
   VariantProps<typeof alertVariants> & {
     icon?: IconName;
     title: string;
-    description: string;
+    description?: string;
   }) {
   return (
-    <Alert variant={variant} inline={inline} className={className} {...props}>
+    <Alert variant={variant} outline={outline} className={className} {...props}>
       {icon && <DynamicIcon name={icon} />}
       <AlertTitle className={cn(description ? "font-semibold" : "font-medium")}>
         {title}

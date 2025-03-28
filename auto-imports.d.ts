@@ -6,7 +6,12 @@
 // biome-ignore lint: disable
 export {}
 declare global {
+  const Badge: typeof import('./src/components/@kirakit/KBadge')['Badge']
   const KAlert: typeof import('./src/components/@kirakit/KAlert')['KAlert']
+  const KBadge: typeof import('./src/components/@kirakit/KBadge')['KBadge']
+  const KButton: typeof import('./src/components/@kirakit/KButton')['KButton']
+  const badgeVariants: typeof import('./src/components/@kirakit/KBadge')['badgeVariants']
+  const buttonVariants: typeof import('./src/components/@kirakit/KButton')['buttonVariants']
   const createRef: typeof import('react')['createRef']
   const forwardRef: typeof import('react')['forwardRef']
   const lazy: typeof import('react')['lazy']

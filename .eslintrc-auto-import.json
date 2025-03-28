@@ -30,6 +30,11 @@
     "useOutletContext": true,
     "useParams": true,
     "useResolvedPath": true,
-    "useRoutes": true
+    "useRoutes": true,
+    "KButton": true,
+    "buttonVariants": true,
+    "KBadge": true,
+    "badgeVariants": true,
+    "Badge": true
   }
 }

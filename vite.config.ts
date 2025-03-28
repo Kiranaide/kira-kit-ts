@@ -21,7 +21,7 @@ export default defineConfig({
       include: [/\.[tj]sx?$/],
       imports: ["react", "react-router"],
       dirs: ["./src/components/@kirakit"],
-      dts: "./auto-imports.d.ts",
+      dts: true,
       viteOptimizeDeps: true,
       eslintrc: {
         enabled: true,
@@ -39,6 +39,7 @@ export default defineConfig({
       "@/lib": path.resolve(__dirname, "./src/lib"),
       "@/hooks": path.resolve(__dirname, "./src/hooks"),
       "@/store": path.resolve(__dirname, "./src/store"),
+      "@/kirakit": path.resolve(__dirname, "./src/components/@kirakit"),
     },
   },
 });
